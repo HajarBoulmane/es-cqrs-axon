@@ -3,11 +3,9 @@ package com.example.demo.command.aggregates;
 import com.example.demo.command.commands.AddAccountCommand;
 import com.example.demo.command.commands.CreditAccountCommand;
 import com.example.demo.command.commands.DebitAccountCommand;
-import com.example.demo.command.enums.AccountStatus;
-import com.example.demo.command.events.AccountActivatedEvent;
-import com.example.demo.command.events.AccountCreatedEvent;
-import com.example.demo.command.events.AccountCreditedEvent;
-import com.example.demo.command.events.AccountDebitedEvent;
+import com.example.demo.command.commands.UpdateAccountStatusCommand;
+import com.example.demo.enums.AccountStatus;
+import com.example.demo.events.*;
 import lombok.extern.slf4j.Slf4j;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.eventsourcing.EventSourcingHandler;
@@ -91,4 +89,17 @@ public class AccountAggregate {
     public void on(AccountDebitedEvent event) {
         this.balance -= event.getAmount();
     }
+
+    @CommandHandler
+    public void handle(UpdateAccountStatusCommand command) {
+        if (this.status.equals(command.getStatus()))
+            throw new RuntimeException("Account is already in status " + command.getStatus());
+        AggregateLifecycle.apply(new AccountStatusUpdatedEvent(command.getId(), command.getStatus()));
+    }
+
+    @EventSourcingHandler
+    public void on(AccountStatusUpdatedEvent event) {
+        this.status = event.getStatus();
+    }
+
 }

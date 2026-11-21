@@ -1,4 +1,4 @@
-package com.example.demo.command.enums;
+package com.example.demo.enums;
 
 public enum AccountStatus {
     CREATED,SUSPENDED,ACTIVATED, BLOCKED;

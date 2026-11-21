@@ -1,6 +1,6 @@
-package com.example.demo.command.events;
+package com.example.demo.events;
 
-import com.example.demo.command.enums.AccountStatus;
+import com.example.demo.enums.AccountStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
