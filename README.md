@@ -73,7 +73,14 @@ com.example.demo
 
 ## Screenshots
 
-Add here: Swagger UI, `domain_event_entry` table in pgAdmin, `/query/watch` live stream.
+**Swagger UI**
+![Swagger](docs/swagger.png)
+
+**Event store (PostgreSQL)**
+![Event store](docs/event-store.png)
+
+**Live stream (SSE)**
+![Watch](docs/watch-live.png)
 
 ## Credits
 
